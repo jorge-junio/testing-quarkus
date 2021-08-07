@@ -17,6 +17,7 @@ dependencies {
     implementation(enforcedPlatform("${quarkusPlatformGroupId}:${quarkusPlatformArtifactId}:${quarkusPlatformVersion}"))
     implementation("io.quarkus:quarkus-jdbc-h2")
     implementation("io.quarkus:quarkus-hibernate-orm")
+    implementation("io.quarkus:quarkus-spring-data-jpa")
     implementation("io.quarkus:quarkus-kotlin")
     implementation("io.quarkus:quarkus-jackson")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")

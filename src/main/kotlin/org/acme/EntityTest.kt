@@ -12,6 +12,6 @@ class EntityTest (
     @Column
     var id: String = "",
 
-    @Column
+    @Column(unique = true)
     var nome: String = "",
 )

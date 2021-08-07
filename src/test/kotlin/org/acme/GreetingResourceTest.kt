@@ -11,10 +11,17 @@ class GreetingResourceTest {
     @Test
     fun testHelloEndpoint() {
         given()
-          .`when`().get("/hello")
-          .then()
-             .statusCode(200)
-             .body(`is`("Hello RESTEasy"))
+            .`when`().get("/hello")
+            .then()
+            .statusCode(200)
+            .body(`is`("Hello RESTEasy"))
     }
 
+    @Test
+    fun testFindAll() {
+        given()
+            .`when`().get("/findall")
+            .then()
+            .statusCode(200)
+    }
 }

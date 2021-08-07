@@ -1,8 +1,8 @@
-//package org.acme
-//
-//import io.quarkus.hibernate.orm.panache.kotlin.PanacheRepositoryBase
-//import javax.enterprise.context.ApplicationScoped
-//
-//@ApplicationScoped
-//class EntityTestRepository : PanacheRepositoryBase<EntityTest, String> {
-//}
+package org.acme
+
+import org.springframework.data.jpa.repository.JpaRepository
+
+interface EntityTestRepository : JpaRepository<EntityTest, String> {
+
+    fun findByNome(nome: String): EntityTest?
+}
