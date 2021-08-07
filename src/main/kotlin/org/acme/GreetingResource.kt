@@ -1,6 +1,5 @@
 package org.acme
 
-//import javax.transaction.Transactional
 import java.util.logging.Logger
 import javax.inject.Inject
 import javax.transaction.Transactional
@@ -67,11 +66,15 @@ class GreetingResource {
             EntityTest("4", "Teste7"),
         )
         entities.onEach {
-            try {
-                save(it)
-            } catch (e: Exception) {
-                Logger.getLogger("logeger").info(e.toString())
+            safeCallTransaction(onError = ::handleError) {
+                entityTestRepository.save(it)
             }
+/*
+            safeCallTransaction(
+                onError = { e -> handleError(e) },
+                block = { entityTestRepository.save(it) }
+            )
+*/
         }
     }
 
@@ -88,12 +91,14 @@ class GreetingResource {
         @PathParam("id") id: String,
         @PathParam("nome") nome: String,
     ): String {
-        try {
+        safeCallTransaction(onError = ::handleError) {
             val entity = EntityTest(id, nome)
             entityTestRepository.save(entity)
-        } catch (e: Exception) {
-            Logger.getLogger("QUARKUS").info(e.toString())
         }
         return "OK"
+    }
+
+    fun handleError(exception: Exception) {
+        Logger.getLogger("QUARKUS").info("EROU!")
     }
 }
